@@ -8,7 +8,7 @@ jobs:
     steps:
       # checkout the repo
       - name: 'Checkout GitHub Action'
-        uses: actions/checkout@main
+        uses: actions/checkout@v2  # Updated to latest version
 
       - name: 'Login via Azure CLI'
         uses: azure/login@v1
@@ -30,4 +30,9 @@ jobs:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
           dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
           image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REPOSITORY_NAME }}:${{ github.run_number }}
-          registry-login-server: $
+          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          name: getting-started-github
+          location: 'west europe'
+          ports: '3000'
